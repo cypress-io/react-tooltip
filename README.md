@@ -1,6 +1,6 @@
-# React tooltip
+# React Tooltip
 
-A tooltip component for React app utilizing the excellent [popper.js library]().
+A tooltip component for React apps utilizing the excellent [popper.js library]().
 
 ## Installation
 
@@ -18,11 +18,13 @@ import Tooltip from '@cypress/react-tooltip'
 </Tooltip>
 ```
 
+The tooltip will automatically appear when mousing over the button and disappear when mousing out from the button.
+
 ## Options
 
 option | default | description | supported values
 ---|----|----|----
-title (_required_) | null | The tooltip text | Any non-empty string
+title | null | _Required_. The tooltip text | Any non-empty string
 placement | 'top' | The placement of the tooltip | Placements supported by [popper.js](https://popper.js.org/documentation.html#new_Popper)
 visible | null | Whether to show the tooltip when rendered. This overrides the default showing/hiding on mouse-over/mouse-out | `true` or `false`
 
