@@ -40,7 +40,7 @@
     "react-dom": "^15.3.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "zunder": "^3.4.12"
+    "zunder": "^3.4.13"
   },
   "peerDependencies": {
     "react": "^15.3.2",
