@@ -1,6 +1,6 @@
 # React Tooltip
 
-A tooltip component for React apps utilizing the excellent [popper.js library]().
+A tooltip component for React apps utilizing the excellent [popper.js library](https://popper.js.org).
 
 ## Installation
 
