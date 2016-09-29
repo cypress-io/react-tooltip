@@ -31,5 +31,8 @@ visible | null | Whether to show the tooltip when rendered. This overrides the d
 
 ## Changelog
 
+#### 0.1.1 - *(09/29/16)*
+- Guard against updating popper state when unmounted
+
 #### 0.1.0 - *(09/28/16)*
 - Initial release
