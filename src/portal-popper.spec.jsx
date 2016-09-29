@@ -66,7 +66,7 @@ describe('<PortalPopper />', () => {
     expect(popperInstance.update).to.have.been.called
   })
 
-  it('destroys the Popper instance of unmount', () => {
+  it('destroys the Popper instance on unmount', () => {
     const popperInstance = popperInstanceStub()
     const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
     component.unmount()

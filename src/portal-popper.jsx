@@ -47,6 +47,8 @@ class PortalPopper extends Component {
     })
 
     this.popper.onUpdate((data) => {
+      if (this.isUnmounted) return
+
       const newState = {}
       if (data.offsets.arrow) newState.arrowProps = data.offsets.arrow
       if (data.offsets.popper) newState.popperProps = data.offsets.popper
@@ -79,6 +81,7 @@ class PortalPopper extends Component {
   }
 
   componentWillUnmount () {
+    this.isUnmounted = true
     this.popper && this.popper.destroy()
   }
 }
