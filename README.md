@@ -28,6 +28,16 @@ title | null | _Required_. The tooltip text | Any non-empty string
 placement | 'top' | The placement of the tooltip | Placements supported by [popper.js](https://popper.js.org/documentation.html#new_Popper)
 visible | null | Whether to show the tooltip when rendered. This overrides the default showing/hiding on mouse-over/mouse-out | `true` or `false`
 
+## Development
+
+```sh
+# watches JS and SCSS for changes and compiles
+# runs tests for associated
+npm start
+
+# run all tests
+npm test
+```
 
 ## Changelog
 
