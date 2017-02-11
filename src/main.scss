@@ -1,5 +1,5 @@
-$tooltip-color: #111;
-$arrow-size: 5px;
+$tooltip-color: #111 !default;
+$arrow-size: 5px !default;
 
 .tooltip {
   background: $tooltip-color;
