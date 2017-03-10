@@ -43,6 +43,9 @@ npm test
 
 ## Changelog
 
+#### 0.2.1 - *(03/10/17)*
+- Fix issues with class names
+
 #### 0.2.0 - *(03/10/17)*
 - Allow specifying tooltip class name and wrapper class name
 
