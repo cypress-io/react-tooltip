@@ -50,7 +50,15 @@ class PortalPopper extends Component {
         style={this._getPopperStyle()}
       >
         <span className={wrapperClassName}>{title}</span>
-        <div ref='arrow' className={`${prefix}-arrow`} style={this._getArrowStyle()} />
+        <div
+          ref='arrow'
+          className={`${prefix}-arrow`}
+          style={this._getArrowStyle()}
+        >
+          <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>
+            <polygon points='5,0 10,5 5,10 0,5' />
+          </svg>
+          </div>
       </Portal>
     )
   }

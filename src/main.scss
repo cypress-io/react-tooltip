@@ -1,54 +1,13 @@
 $cy-tooltip-class: 'tooltip' !default;
 $cy-tooltip-background-color: #111 !default;
 $cy-tooltip-color: #FFF !default;
+$cy-tooltip-border-color: #111 !default;
+$cy-tooltip-border-width: 1px !default;
 $arrow-size: 5px !default;
-
-@mixin cy-tooltip-color($color) {
-  &.#{$cy-tooltip-class} {
-    color: $color;
-  }
-}
-
-@mixin cy-tooltip-background-color($color) {
-  &.#{$cy-tooltip-class} {
-    background: $color;
-  }
-
-  &.#{$cy-tooltip-class}-top,
-  &.#{$cy-tooltip-class}-top-start,
-  &.#{$cy-tooltip-class}-top-end {
-    .#{$cy-tooltip-class}-arrow {
-      border-top-color: $color;
-    }
-  }
-
-  &.#{$cy-tooltip-class}-right,
-  &.#{$cy-tooltip-class}-right-start,
-  &.#{$cy-tooltip-class}-right-end {
-    .#{$cy-tooltip-class}-arrow {
-      border-right-color: $color;
-    }
-  }
-
-  &.#{$cy-tooltip-class}-left,
-  &.#{$cy-tooltip-class}-left-start,
-  &.#{$cy-tooltip-class}-left-end {
-    .#{$cy-tooltip-class}-arrow {
-      border-left-color: $color;
-    }
-  }
-
-  &.#{$cy-tooltip-class}-bottom,
-  &.#{$cy-tooltip-class}-bottom-start,
-  &.#{$cy-tooltip-class}-bottom-end {
-    .#{$cy-tooltip-class}-arrow {
-      border-bottom-color: $color;
-    }
-  }
-}
 
 .#{$cy-tooltip-class} {
   background: $cy-tooltip-background-color;
+  border: solid $cy-tooltip-border-width $cy-tooltip-border-color;
   border-radius: 3px;
   color: $cy-tooltip-color;
   display: inline-block;
@@ -62,11 +21,17 @@ $arrow-size: 5px !default;
 }
 
 .#{$cy-tooltip-class}-arrow {
-  border-color: transparent;
-  border-style: solid;
   height: 0;
+  overflow: hidden;
   position: absolute;
   width: 0;
+
+  svg {
+    fill: $cy-tooltip-background-color;
+    position: relative;
+    stroke: $cy-tooltip-border-color;
+    stroke-width: $cy-tooltip-border-width;
+  }
 }
 
 .#{$cy-tooltip-class}-top,
@@ -75,9 +40,13 @@ $arrow-size: 5px !default;
   margin-bottom: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
-    bottom: -$arrow-size;
-    border-width: $arrow-size $arrow-size 0;
-    border-top-color: $cy-tooltip-background-color;
+    bottom: -$arrow-size - $cy-tooltip-border-width;
+    height: $arrow-size + $cy-tooltip-border-width;
+    width: $arrow-size * 2 + $cy-tooltip-border-width * 2;
+
+    svg {
+      top: -$arrow-size;
+    }
   }
 }
 
@@ -87,9 +56,9 @@ $arrow-size: 5px !default;
   margin-left: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
-    left: -$arrow-size;
-    border-width: $arrow-size $arrow-size $arrow-size 0;
-    border-right-color: $cy-tooltip-background-color;
+    left: -$arrow-size - $cy-tooltip-border-width;
+    height: $arrow-size * 2 + $cy-tooltip-border-width * 2;
+    width: $arrow-size + $cy-tooltip-border-width;
   }
 }
 
@@ -99,9 +68,13 @@ $arrow-size: 5px !default;
   margin-right: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
-    right: -$arrow-size;
-    border-width: $arrow-size 0 $arrow-size $arrow-size;
-    border-left-color: $cy-tooltip-background-color;
+    right: -$arrow-size - $cy-tooltip-border-width;
+    height: $arrow-size * 2 + $cy-tooltip-border-width * 2;
+    width: $arrow-size + $cy-tooltip-border-width;
+
+    svg {
+      left: -$arrow-size;
+    }
   }
 }
 
@@ -111,8 +84,8 @@ $arrow-size: 5px !default;
   margin-top: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
-    top: -$arrow-size;
-    border-width: 0 $arrow-size $arrow-size;
-    border-bottom-color: $cy-tooltip-background-color;
+    height: $arrow-size + $cy-tooltip-border-width;
+    top: -$arrow-size - $cy-tooltip-border-width;
+    width: $arrow-size * 2 + $cy-tooltip-border-width * 2;
   }
 }
