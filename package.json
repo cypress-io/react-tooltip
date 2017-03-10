@@ -8,7 +8,7 @@
     "build-prod": "node ./scripts/build-prod.js",
     "prepublish": "npm run build-prod",
     "release": "releaser",
-    "start": "node ./scripts/watch.js",
+    "start": "node ./scripts/watch.js --port 8888",
     "test": "node ./scripts/test.js"
   },
   "repository": {

@@ -8,7 +8,10 @@ u.series(
   z.applyDevEnv,
   z.cleanDev,
   u.parallel(
+    z.watchServer,
+    z.watchStaticAssets,
     z.watchTests,
+    z.watchScripts,
     z.watchStylesheets
   )
 )()
