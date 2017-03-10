@@ -42,18 +42,20 @@ class PortalPopper extends Component {
     this.popper = new this.props.Popper(this.props.getTargetNode(), this.refs.popper.domNode, {
       content: this.props.title,
       placement: this.props.placement,
-      modifiersIgnored: ['applyStyle'],
-      arrowElement: this.refs.arrow,
+      modifiers: {
+        applyStyle: { enabled: true },
+        arrow: { element: this.refs.arrow },
+      },
     })
 
-    this.popper.onUpdate((data) => {
+    this.popper.onUpdate = (data) => {
       if (this.isUnmounted) return
 
       const newState = {}
       if (data.offsets.arrow) newState.arrowProps = data.offsets.arrow
       if (data.offsets.popper) newState.popperProps = data.offsets.popper
       this.setState(newState)
-    })
+    }
 
     this.popper.update()
   }

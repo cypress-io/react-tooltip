@@ -55,8 +55,10 @@ describe('<PortalPopper />', () => {
     expect(Popper.getCall(0).args[2]).to.eql({
       content: 'tooltip title',
       placement: 'top',
-      modifiersIgnored: ['applyStyle'],
-      arrowElement: component.ref('arrow').node,
+      modifiers: {
+        applyStyle: { enabled: true },
+        arrow: { element: component.ref('arrow').node },
+      },
     })
   })
 
@@ -77,7 +79,7 @@ describe('<PortalPopper />', () => {
     it('updates the arrow props if specified', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: { arrow: { left: 5, top: 10 } } })
+      popperInstance.onUpdate({ offsets: { arrow: { left: 5, top: 10 } } })
       expect(component.ref('arrow').prop('style').left).to.equal(5)
       expect(component.ref('arrow').prop('style').top).to.equal(10)
     })
@@ -85,7 +87,7 @@ describe('<PortalPopper />', () => {
     it('does not update the arrow props if not specified', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: {} })
+      popperInstance.onUpdate({ offsets: {} })
       expect(component.ref('arrow').prop('style').left).to.equal(0)
       expect(component.ref('arrow').prop('style').top).to.equal(0)
     })
@@ -93,7 +95,7 @@ describe('<PortalPopper />', () => {
     it('only updates the arrow props that are specified', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: { arrow: { top: 20 } } })
+      popperInstance.onUpdate({ offsets: { arrow: { top: 20 } } })
       expect(component.ref('arrow').prop('style').left).to.equal(null)
       expect(component.ref('arrow').prop('style').top).to.equal(20)
     })
@@ -101,7 +103,7 @@ describe('<PortalPopper />', () => {
     it('rounds the arrow props', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: { arrow: { left: 7.2, top: 20.8 } } })
+      popperInstance.onUpdate({ offsets: { arrow: { left: 7.2, top: 20.8 } } })
       expect(component.ref('arrow').prop('style').left).to.equal(7)
       expect(component.ref('arrow').prop('style').top).to.equal(21)
     })
@@ -109,7 +111,7 @@ describe('<PortalPopper />', () => {
     it('updates the popper props if specified', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: { popper: { position: 'relative', left: 2, top: 4 } } })
+      popperInstance.onUpdate({ offsets: { popper: { position: 'relative', left: 2, top: 4 } } })
       expect(component.find(Portal).prop('style').position).to.equal('relative')
       expect(component.find(Portal).prop('style').transform).to.equal('translate3d(2px, 4px, 0)')
       expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(2px, 4px, 0)')
@@ -118,7 +120,7 @@ describe('<PortalPopper />', () => {
     it('does not update the popper props if not specified', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: {} })
+      popperInstance.onUpdate({ offsets: {} })
       expect(component.find(Portal).prop('style').position).to.equal('absolute')
       expect(component.find(Portal).prop('style').transform).to.equal('translate3d(0px, 0px, 0)')
       expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(0px, 0px, 0)')
@@ -127,7 +129,7 @@ describe('<PortalPopper />', () => {
     it('rounds the popper props', () => {
       const popperInstance = popperInstanceStub()
       const component = mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-      popperInstance.onUpdate.yield({ offsets: { popper: { left: 15.2, top: 2.8 } } })
+      popperInstance.onUpdate({ offsets: { popper: { left: 15.2, top: 2.8 } } })
       expect(component.find(Portal).prop('style').transform).to.equal('translate3d(15px, 3px, 0)')
       expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(15px, 3px, 0)')
     })
