@@ -43,6 +43,9 @@ npm test
 
 ## Changelog
 
+#### 0.2.2 - *(03/10/17)*
+- Add customizable tooltip border
+
 #### 0.2.1 - *(03/10/17)*
 - Fix issues with class names
 
