@@ -16,6 +16,18 @@ const initialPopperProps = {
 }
 
 class PortalPopper extends Component {
+  static propTypes = {
+    placement: PropTypes.string.isRequired,
+    getTargetNode: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    wrapperClassName: PropTypes.string,
+  }
+
+  static defaultProps = {
+    Popper,
+  }
+
   constructor (...props) {
     super(...props)
 
@@ -26,14 +38,16 @@ class PortalPopper extends Component {
   }
 
   render () {
+    const { className, placement, title, wrapperClassName } = this.props
+
     return (
       <Portal
         ref='popper'
-        className={`tooltip tooltip-${this.props.placement}`}
+        className={`${className} ${className}-${placement}`}
         style={this._getPopperStyle()}
       >
-        <span>{this.props.title}</span>
-        <div ref='arrow' className='tooltip-arrow' style={this._getArrowStyle()} />
+        <span className={wrapperClassName}>{title}</span>
+        <div ref='arrow' className={`${className}-arrow`} style={this._getArrowStyle()} />
       </Portal>
     )
   }
@@ -86,16 +100,6 @@ class PortalPopper extends Component {
     this.isUnmounted = true
     this.popper && this.popper.destroy()
   }
-}
-
-PortalPopper.propTypes = {
-  placement: PropTypes.string.isRequired,
-  getTargetNode: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-}
-
-PortalPopper.defaultProps = {
-  Popper,
 }
 
 export default PortalPopper

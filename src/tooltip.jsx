@@ -3,6 +3,20 @@ import React, { Children, cloneElement, Component, PropTypes } from 'react'
 import PortalPopper from './portal-popper'
 
 class Tooltip extends Component {
+  static propTypes = {
+    placement: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    visible: PropTypes.bool,
+    className: PropTypes.string,
+    wrapperClassName: PropTypes.string,
+  }
+
+  static defaultProps = {
+    placement: 'top',
+    className: 'tooltip',
+    wrapperClassName: '',
+  }
+
   constructor (...props) {
     super(...props)
 
@@ -36,19 +50,11 @@ class Tooltip extends Component {
         getTargetNode={() => this.refs.target}
         title={this.props.title}
         placement={this.props.placement}
+        className={this.props.className}
+        wrapperClassName={this.props.wrapperClassName}
       />
     )
   }
-}
-
-Tooltip.propTypes = {
-  placement: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  visible: PropTypes.bool,
-}
-
-Tooltip.defaultProps = {
-  placement: 'top',
 }
 
 export default Tooltip

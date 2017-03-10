@@ -25,7 +25,7 @@ const popperStub = (popperInstance) => sinon.stub().returns(popperInstance)
 
 describe('<PortalPopper />', () => {
   it('renders a <Portal /> with a placement class', () => {
-    const component = shallow(<PortalPopper {...getProps()} />)
+    const component = shallow(<PortalPopper {...getProps({ className: 'tooltip' })} />)
     expect(component.find(Portal)).to.have.className('tooltip-top')
   })
 
@@ -42,9 +42,21 @@ describe('<PortalPopper />', () => {
   })
 
   it('renders the tooltip arrow with default styles', () => {
-    const component = shallow(<PortalPopper {...getProps()} />)
-    expect(component.find('.tooltip-arrow').prop('style').left).to.equal(0)
-    expect(component.find('.tooltip-arrow').prop('style').top).to.equal(0)
+    const component = shallow(<PortalPopper {...getProps({})} />)
+    expect(component.find('div').prop('style').left).to.equal(0)
+    expect(component.find('div').prop('style').top).to.equal(0)
+  })
+
+  it('renders with className specified', () => {
+    const component = shallow(<PortalPopper {...getProps({ className: 'the-tooltip' })} />)
+    expect(component.find(Portal)).to.have.className('the-tooltip')
+    expect(component.find(Portal)).to.have.className('the-tooltip-top')
+    expect(component.find('div')).to.have.className('the-tooltip-arrow')
+  })
+
+  it('renders with wrapperClassName specified', () => {
+    const component = shallow(<PortalPopper {...getProps({ wrapperClassName: 'the-wrap' })} />)
+    expect(component.find('span')).to.have.className('the-wrap')
   })
 
   it('creates Popper instance with the right props', () => {
