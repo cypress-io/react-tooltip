@@ -43,6 +43,9 @@ npm test
 
 ## Changelog
 
+#### 0.2.0 - *(03/10/17)*
+- Allow specifying tooltip class name and wrapper class name
+
 #### 0.1.4 - *(03/10/17)*
 - Upgrade popper.js to 1.x.x
 
