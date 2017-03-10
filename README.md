@@ -41,6 +41,9 @@ npm test
 
 ## Changelog
 
+#### 0.1.4 - *(03/10/17)*
+- Upgrade popper.js to 1.x.x
+
 #### 0.1.1 - *(09/29/16)*
 - Guard against updating popper state when unmounted
 
