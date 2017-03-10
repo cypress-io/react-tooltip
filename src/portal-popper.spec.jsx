@@ -54,6 +54,12 @@ describe('<PortalPopper />', () => {
     expect(component.find('div')).to.have.className('the-tooltip-arrow')
   })
 
+  it('uses last className as prefix if multiple', () => {
+    const component = shallow(<PortalPopper {...getProps({ className: 'custom-class the-tooltip' })} />)
+    expect(component.find(Portal).prop('className')).to.equal('custom-class the-tooltip the-tooltip-top')
+    expect(component.find('div').prop('className')).to.equal('the-tooltip-arrow')
+  })
+
   it('renders with wrapperClassName specified', () => {
     const component = shallow(<PortalPopper {...getProps({ wrapperClassName: 'the-wrap' })} />)
     expect(component.find('span')).to.have.className('the-wrap')

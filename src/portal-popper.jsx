@@ -26,6 +26,8 @@ class PortalPopper extends Component {
 
   static defaultProps = {
     Popper,
+    className: '',
+    wrapperClassName: '',
   }
 
   constructor (...props) {
@@ -39,15 +41,16 @@ class PortalPopper extends Component {
 
   render () {
     const { className, placement, title, wrapperClassName } = this.props
+    const prefix = _.last(className.split(' '))
 
     return (
       <Portal
         ref='popper'
-        className={`${className} ${className}-${placement}`}
+        className={`${className} ${prefix}-${placement}`}
         style={this._getPopperStyle()}
       >
         <span className={wrapperClassName}>{title}</span>
-        <div ref='arrow' className={`${className}-arrow`} style={this._getArrowStyle()} />
+        <div ref='arrow' className={`${prefix}-arrow`} style={this._getArrowStyle()} />
       </Portal>
     )
   }

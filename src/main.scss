@@ -1,11 +1,11 @@
-$cy-tooltip-class: 'tooltip';
+$cy-tooltip-class: 'tooltip' !default;
 $cy-tooltip-background-color: #111 !default;
 $cy-tooltip-color: #FFF !default;
 $arrow-size: 5px !default;
 
 @mixin cy-tooltip-color($color) {
   &.#{$cy-tooltip-class} {
-    color: $color; 
+    color: $color;
   }
 }
 
