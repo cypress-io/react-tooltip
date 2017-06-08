@@ -24,7 +24,8 @@
     "dist"
   ],
   "dependencies": {
-    "popper.js": "^1.0.7"
+    "popper.js": "^1.0.7",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "@cypress/releaser": "0.1.12",
