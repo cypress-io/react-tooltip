@@ -20,7 +20,7 @@ class PortalPopper extends Component {
   static propTypes = {
     placement: PropTypes.string.isRequired,
     getTargetNode: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
     className: PropTypes.string,
     wrapperClassName: PropTypes.string,
   }

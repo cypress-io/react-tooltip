@@ -6,7 +6,7 @@ import PortalPopper from './portal-popper'
 class Tooltip extends Component {
   static propTypes = {
     placement: PropTypes.string,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
     visible: PropTypes.bool,
     className: PropTypes.string,
     wrapperClassName: PropTypes.string,
