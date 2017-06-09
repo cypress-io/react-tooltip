@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Children, cloneElement, Component } from 'react'
 import PropTypes from 'prop-types'
 
@@ -46,14 +47,10 @@ class Tooltip extends Component {
   _popper () {
     if (this.props.visible !== true && (!this.state.shouldShow || this.props.visible === false)) return null
 
+    const props = _.pick(this.props, 'title', 'placement', 'className', 'wrapperClassName', 'updateCue')
+
     return (
-      <PortalPopper
-        getTargetNode={() => this.refs.target}
-        title={this.props.title}
-        placement={this.props.placement}
-        className={this.props.className}
-        wrapperClassName={this.props.wrapperClassName}
-      />
+      <PortalPopper getTargetNode={() => this.refs.target} {...props} />
     )
   }
 }

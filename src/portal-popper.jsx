@@ -86,6 +86,12 @@ class PortalPopper extends Component {
     this.popper.update()
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.updateCue !== this.props.updateCue) {
+      this.popper.update()
+    }
+  }
+
   _getPopperStyle () {
     const left = Math.round(this.state.popperProps.left)
     const top = Math.round(this.state.popperProps.top)
