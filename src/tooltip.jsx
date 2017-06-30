@@ -32,7 +32,7 @@ class Tooltip extends Component {
     } : {}
 
     return (
-      <span>
+      <span className={this.props.wrapperClassName}>
         {cloneElement(Children.only(this.props.children), {
           ref: 'target',
           ...actionProps,
@@ -51,7 +51,6 @@ class Tooltip extends Component {
         title={this.props.title}
         placement={this.props.placement}
         className={this.props.className}
-        wrapperClassName={this.props.wrapperClassName}
       />
     )
   }

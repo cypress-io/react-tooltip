@@ -21,13 +21,11 @@ class PortalPopper extends Component {
     getTargetNode: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     className: PropTypes.string,
-    wrapperClassName: PropTypes.string,
   }
 
   static defaultProps = {
     Popper,
     className: '',
-    wrapperClassName: '',
   }
 
   constructor (...props) {
@@ -40,7 +38,7 @@ class PortalPopper extends Component {
   }
 
   render () {
-    const { className, placement, title, wrapperClassName } = this.props
+    const { className, placement, title } = this.props
     const prefix = _.last(className.split(' '))
 
     return (
@@ -49,7 +47,7 @@ class PortalPopper extends Component {
         className={`${className} ${prefix}-${placement}`}
         style={this._getPopperStyle()}
       >
-        <span className={wrapperClassName}>{title}</span>
+        <span>{title}</span>
         <div
           ref='arrow'
           className={`${prefix}-arrow`}

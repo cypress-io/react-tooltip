@@ -30,22 +30,22 @@ describe('<Tooltip />', () => {
 
   it('renders popper with default className', () => {
     const component = shallow(createComponent({ visible: true }))
-    expect(component.find(PortalPopper).prop('className')).to.equal('tooltip')
+    expect(component.find(PortalPopper)).to.have.className('tooltip')
   })
 
-  it('renders popper with default wrapperClassName', () => {
+  it('renders outer span with default wrapperClassName', () => {
     const component = shallow(createComponent({ visible: true }))
-    expect(component.find(PortalPopper).prop('wrapperClassName')).to.equal('')
+    expect(component.find('span')).to.have.className('')
   })
 
   it('renders popper with specified className', () => {
     const component = shallow(createComponent({ visible: true, className: 'custom-class' }))
-    expect(component.find(PortalPopper).prop('className')).to.equal('custom-class')
+    expect(component.find(PortalPopper)).to.have.className('custom-class')
   })
 
-  it('renders popper with specified wrapperClassName', () => {
+  it('renders outer span with specified wrapperClassName', () => {
     const component = shallow(createComponent({ visible: true, wrapperClassName: 'custom-wrap-class' }))
-    expect(component.find(PortalPopper).prop('wrapperClassName')).to.equal('custom-wrap-class')
+    expect(component.find('span')).to.have.className('custom-wrap-class')
   })
 
   describe('when visible is not explicitly specified', () => {

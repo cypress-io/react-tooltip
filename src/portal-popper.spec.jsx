@@ -60,11 +60,6 @@ describe('<PortalPopper />', () => {
     expect(component.find('div').prop('className')).to.equal('the-tooltip-arrow')
   })
 
-  it('renders with wrapperClassName specified', () => {
-    const component = shallow(<PortalPopper {...getProps({ wrapperClassName: 'the-wrap' })} />)
-    expect(component.find('span')).to.have.className('the-wrap')
-  })
-
   it('creates Popper instance with the right props', () => {
     const Popper = popperStub(popperInstanceStub())
     const component = mount(<PortalPopper {...getProps({ Popper })} />)
