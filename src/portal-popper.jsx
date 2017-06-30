@@ -1,5 +1,6 @@
 import _ from 'lodash'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Popper from 'popper.js'
 
 import Portal from './portal'
@@ -19,7 +20,7 @@ class PortalPopper extends Component {
   static propTypes = {
     placement: PropTypes.string.isRequired,
     getTargetNode: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
     className: PropTypes.string,
   }
 
@@ -81,6 +82,12 @@ class PortalPopper extends Component {
     }
 
     this.popper.update()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.updateCue !== this.props.updateCue) {
+      this.popper.update()
+    }
   }
 
   _getPopperStyle () {

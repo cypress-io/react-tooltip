@@ -1,6 +1,6 @@
 {
   "name": "@cypress/react-tooltip",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "A tooltip component for React apps",
   "main": "dist/tooltip.js",
   "scripts": {
@@ -24,10 +24,11 @@
     "dist"
   ],
   "dependencies": {
-    "popper.js": "^1.0.7"
+    "popper.js": "^1.0.7",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
-    "@cypress/core-releaser": "^0.1.8",
+    "@cypress/releaser": "0.1.12",
     "babel-eslint": "^7.0.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.5.1",
@@ -42,7 +43,7 @@
     "react-dom": "^15.3.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "zunder": "^3.4.13"
+    "zunder": "^4.1.1"
   },
   "peerDependencies": {
     "lodash": "^4.0.0",
