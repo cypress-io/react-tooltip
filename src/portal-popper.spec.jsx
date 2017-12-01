@@ -63,17 +63,16 @@ describe('<PortalPopper />', () => {
 
   it('creates Popper instance with the right props', () => {
     const Popper = popperStub(popperInstanceStub())
-    const component = mount(<PortalPopper {...getProps({ Popper })} />)
+    mount(<PortalPopper {...getProps({ Popper, boundary: 'boundary' })} />)
     expect(Popper).to.have.been.called
-    expect(Popper.getCall(0).args[0]).to.equal('target node')
-    expect(Popper.getCall(0).args[2]).to.eql({
-      content: 'tooltip title',
-      placement: 'top',
-      modifiers: {
-        applyStyle: { enabled: true },
-        arrow: { element: component.ref('arrow').node },
-      },
+    expect(Popper.firstCall.args[0]).to.equal('target node')
+    expect(Popper.firstCall.args[2].content).to.equal('tooltip title')
+    expect(Popper.firstCall.args[2].placement).to.equal('top')
+    expect(Popper.firstCall.args[2].modifiers.preventOverflow).to.eql({
+      boundariesElement: 'boundary',
     })
+    expect(Popper.firstCall.args[2].onCreate).to.be.a('function')
+    expect(Popper.firstCall.args[2].onUpdate).to.be.a('function')
   })
 
   it('calls scheduleUpdate() on the Popper instance', () => {

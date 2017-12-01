@@ -14,8 +14,8 @@ class Tooltip extends Component {
   }
 
   static defaultProps = {
-    placement: 'top',
     className: 'tooltip',
+    placement: 'top',
     wrapperClassName: '',
   }
 
@@ -47,7 +47,7 @@ class Tooltip extends Component {
   _popper () {
     if (this.props.visible !== true && (!this.state.shouldShow || this.props.visible === false)) return null
 
-    const props = _.pick(this.props, 'title', 'placement', 'className', 'updateCue')
+    const props = _.omit(this.props, 'wrapperClassName', 'children')
 
     return (
       <PortalPopper getTargetNode={() => this.refs.target} {...props} />

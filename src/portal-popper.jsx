@@ -27,6 +27,7 @@ class PortalPopper extends Component {
   static defaultProps = {
     Popper,
     className: '',
+    boundary: document.body,
   }
 
   constructor (...props) {
@@ -49,6 +50,7 @@ class PortalPopper extends Component {
         ref='portal'
         className={`${className} ${prefix}-${placement}${flippedClass}`}
         style={this._getPopperStyle()}
+        appendTo={this.props.appendTo}
       >
         <span>{title}</span>
         <div
@@ -59,7 +61,7 @@ class PortalPopper extends Component {
           <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>
             <polygon points='5,0 10,5 5,10 0,5' />
           </svg>
-          </div>
+        </div>
       </Portal>
     )
   }
@@ -69,8 +71,10 @@ class PortalPopper extends Component {
       content: this.props.title,
       placement: this.props.placement,
       modifiers: {
-        applyStyle: { enabled: true },
         arrow: { element: this.refs.arrow },
+        preventOverflow: {
+          boundariesElement: this.props.boundary,
+        },
       },
       onCreate: this._updateData,
       onUpdate: this._updateData,
