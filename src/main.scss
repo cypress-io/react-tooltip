@@ -36,10 +36,14 @@ $arrow-size: 5px !default;
 
 .#{$cy-tooltip-class}-top,
 .#{$cy-tooltip-class}-top-start,
-.#{$cy-tooltip-class}-top-end {
+.#{$cy-tooltip-class}-top-end,
+.#{$cy-tooltip-class}-bottom.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-bottom-start.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-bottom-end.#{$cy-tooltip-class}-flipped {
   margin-bottom: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
+    top: auto;
     bottom: -$arrow-size - $cy-tooltip-border-width;
     height: $arrow-size + $cy-tooltip-border-width;
     width: $arrow-size * 2 + $cy-tooltip-border-width * 2;
@@ -52,22 +56,34 @@ $arrow-size: 5px !default;
 
 .#{$cy-tooltip-class}-right,
 .#{$cy-tooltip-class}-right-start,
-.#{$cy-tooltip-class}-right-end {
+.#{$cy-tooltip-class}-right-end,
+.#{$cy-tooltip-class}-left.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-left-start.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-left-end.#{$cy-tooltip-class}-flipped {
   margin-left: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
+    right: auto;
     left: -$arrow-size - $cy-tooltip-border-width;
     height: $arrow-size * 2 + $cy-tooltip-border-width * 2;
     width: $arrow-size + $cy-tooltip-border-width;
+  }
+
+  svg {
+    left: 0;
   }
 }
 
 .#{$cy-tooltip-class}-left,
 .#{$cy-tooltip-class}-left-start,
-.#{$cy-tooltip-class}-left-end {
+.#{$cy-tooltip-class}-left-end,
+.#{$cy-tooltip-class}-right.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-right-start.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-right-end.#{$cy-tooltip-class}-flipped {
   margin-right: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
+    left: auto;
     right: -$arrow-size - $cy-tooltip-border-width;
     height: $arrow-size * 2 + $cy-tooltip-border-width * 2;
     width: $arrow-size + $cy-tooltip-border-width;
@@ -80,12 +96,40 @@ $arrow-size: 5px !default;
 
 .#{$cy-tooltip-class}-bottom,
 .#{$cy-tooltip-class}-bottom-start,
-.#{$cy-tooltip-class}-bottom-end {
+.#{$cy-tooltip-class}-bottom-end,
+.#{$cy-tooltip-class}-top.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-top-start.#{$cy-tooltip-class}-flipped,
+.#{$cy-tooltip-class}-top-end.#{$cy-tooltip-class}-flipped {
   margin-top: $arrow-size;
 
   .#{$cy-tooltip-class}-arrow {
+    bottom: auto;
     height: $arrow-size + $cy-tooltip-border-width;
     top: -$arrow-size - $cy-tooltip-border-width;
     width: $arrow-size * 2 + $cy-tooltip-border-width * 2;
   }
+
+  svg {
+    top: 0;
+  }
+}
+
+.#{$cy-tooltip-class}-top-start .#{$cy-tooltip-class}-arrow,
+.#{$cy-tooltip-class}-bottom-start .#{$cy-tooltip-class}-arrow {
+  left: 0;
+}
+
+.#{$cy-tooltip-class}-top-end .#{$cy-tooltip-class}-arrow,
+.#{$cy-tooltip-class}-bottom-end .#{$cy-tooltip-class}-arrow {
+  right: 0;
+}
+
+.#{$cy-tooltip-class}-left-start .#{$cy-tooltip-class}-arrow,
+.#{$cy-tooltip-class}-right-start .#{$cy-tooltip-class}-arrow {
+  top: 0;
+}
+
+.#{$cy-tooltip-class}-left-end .#{$cy-tooltip-class}-arrow,
+.#{$cy-tooltip-class}-right-end .#{$cy-tooltip-class}-arrow {
+  bottom: 0;
 }

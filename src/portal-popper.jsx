@@ -35,17 +35,19 @@ class PortalPopper extends Component {
     this.state = {
       arrowProps: initialArrowProps,
       popperProps: initialPopperProps,
+      flipped: false,
     }
   }
 
   render () {
     const { className, placement, title } = this.props
     const prefix = _.last(className.split(' '))
+    const flippedClass = this.state.flipped ? ` ${prefix}-flipped` : ''
 
     return (
       <Portal
-        className={`${className} ${prefix}-${placement}`}
         ref='portal'
+        className={`${className} ${prefix}-${placement}${flippedClass}`}
         style={this._getPopperStyle()}
       >
         <span>{title}</span>
