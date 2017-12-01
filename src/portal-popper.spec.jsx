@@ -17,7 +17,7 @@ const getProps = (props) => {
 
 const popperInstanceStub = () => ({
   onUpdate: sinon.spy(),
-  update: sinon.spy(),
+  scheduleUpdate: sinon.spy(),
   destroy: sinon.spy(),
 })
 
@@ -75,10 +75,10 @@ describe('<PortalPopper />', () => {
     })
   })
 
-  it('calls update() on the Popper instance', () => {
+  it('calls scheduleUpdate() on the Popper instance', () => {
     const popperInstance = popperInstanceStub()
     mount(<PortalPopper {...getProps({ Popper: popperStub(popperInstance) })} />)
-    expect(popperInstance.update).to.have.been.called
+    expect(popperInstance.scheduleUpdate).to.have.been.called
   })
 
   it('destroys the Popper instance on unmount', () => {

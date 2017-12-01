@@ -81,12 +81,12 @@ class PortalPopper extends Component {
       this.setState(newState)
     }
 
-    this.popper.update()
+    this.popper.scheduleUpdate()
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.updateCue !== this.props.updateCue) {
-      this.popper.update()
+      this.popper.scheduleUpdate()
     }
   }
 
