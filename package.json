@@ -24,7 +24,7 @@
     "dist"
   ],
   "dependencies": {
-    "popper.js": "^1.0.7",
+    "popper.js": "^1.12.9",
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
