@@ -44,8 +44,8 @@ class PortalPopper extends Component {
 
     return (
       <Portal
-        ref='popper'
         className={`${className} ${prefix}-${placement}`}
+        ref='portal'
         style={this._getPopperStyle()}
       >
         <span>{title}</span>
@@ -63,23 +63,16 @@ class PortalPopper extends Component {
   }
 
   componentDidMount () {
-    this.popper = new this.props.Popper(this.props.getTargetNode(), this.refs.popper.domNode, {
+    this.popper = new this.props.Popper(this.props.getTargetNode(), this.refs.portal.domNode, {
       content: this.props.title,
       placement: this.props.placement,
       modifiers: {
         applyStyle: { enabled: true },
         arrow: { element: this.refs.arrow },
       },
+      onCreate: this._updateData,
+      onUpdate: this._updateData,
     })
-
-    this.popper.onUpdate = (data) => {
-      if (this.isUnmounted) return
-
-      const newState = {}
-      if (data.offsets.arrow) newState.arrowProps = data.offsets.arrow
-      if (data.offsets.popper) newState.popperProps = data.offsets.popper
-      this.setState(newState)
-    }
 
     this.popper.scheduleUpdate()
   }
@@ -88,6 +81,16 @@ class PortalPopper extends Component {
     if (prevProps.updateCue !== this.props.updateCue) {
       this.popper.scheduleUpdate()
     }
+  }
+
+  _updateData = (data) => {
+    if (this.isUnmounted) return
+
+    const newState = {}
+    if (data.offsets.arrow) newState.arrowProps = data.offsets.arrow
+    if (data.offsets.popper) newState.popperProps = data.offsets.popper
+    if (data.flipped != null) newState.flipped = data.flipped
+    this.setState(newState)
   }
 
   _getPopperStyle () {
