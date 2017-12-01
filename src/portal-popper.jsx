@@ -103,13 +103,14 @@ class PortalPopper extends Component {
   }
 
   _getArrowStyle () {
-    const left = _.isNumber(this.state.arrowProps.left) ? Math.round(this.state.arrowProps.left) : null
-    const top = _.isNumber(this.state.arrowProps.top) ? Math.round(this.state.arrowProps.top) : null
-
     return {
-      left,
-      top,
+      left: this._getArrowProp('left'),
+      top: this._getArrowProp('top'),
     }
+  }
+
+  _getArrowProp (position) {
+    return _.isNumber(this.state.arrowProps[position]) ? Math.round(this.state.arrowProps[position]) : null
   }
 
   componentWillUnmount () {
