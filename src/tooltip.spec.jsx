@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
+import sinon from 'sinon'
 
 import PortalPopper from './portal-popper'
 
@@ -11,9 +12,9 @@ const defaultProps = {
   title: 'Do foo',
 }
 
-const createComponent = (props) => (
+const createComponent = (props, child) => (
   <Tooltip {..._.extend({}, defaultProps, props)}>
-    <div className='target' />
+    {child || <div className='target' />}
   </Tooltip>
 )
 
@@ -46,6 +47,22 @@ describe('<Tooltip />', () => {
   it('renders outer span with specified wrapperClassName', () => {
     const component = shallow(createComponent({ visible: true, wrapperClassName: 'custom-wrap-class' }))
     expect(component.find('span')).to.have.className('custom-wrap-class')
+  })
+
+  it('calls onMouseOver if specified', () => {
+    const onMouseOver = sinon.spy()
+    const component = mount(createComponent({}, <div onMouseOver={onMouseOver} />))
+    const args = [1, 2, 3]
+    component.find('div').prop('onMouseOver')(...args)
+    expect(onMouseOver).to.be.calledWith(...args)
+  })
+
+  it('calls onMouseOut if specified', () => {
+    const onMouseOut = sinon.spy()
+    const component = mount(createComponent({}, <div onMouseOut={onMouseOut} />))
+    const args = [1, 2, 3]
+    component.find('div').prop('onMouseOut')(...args)
+    expect(onMouseOut).to.be.calledWith(...args)
   })
 
   describe('when visible is not explicitly specified', () => {

@@ -28,9 +28,17 @@ class Tooltip extends Component {
   }
 
   render () {
+    const child = Children.only(this.props.children)
+
     const actionProps = this.props.visible == null ? {
-      onMouseOver: () => this.setState({ shouldShow: true }),
-      onMouseOut: () => this.setState({ shouldShow: false }),
+      onMouseOver: (...args) => {
+        child.props.onMouseOver && child.props.onMouseOver(...args)
+        this.setState({ shouldShow: true })
+      },
+      onMouseOut: (...args) => {
+        child.props.onMouseOut && child.props.onMouseOut(...args)
+        this.setState({ shouldShow: false })
+      },
     } : {}
 
     return (
