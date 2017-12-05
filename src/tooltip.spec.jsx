@@ -65,6 +65,12 @@ describe('<Tooltip />', () => {
     expect(onMouseOut).to.be.calledWith(...args)
   })
 
+  it('allows callee to have ref on child', () => {
+    const ref = sinon.spy()
+    mount(createComponent({}, <div ref={ref} />))
+    expect(ref).to.be.called
+  })
+
   describe('when visible is not explicitly specified', () => {
     let component
     beforeEach(() => {

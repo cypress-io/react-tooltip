@@ -43,8 +43,13 @@ class Tooltip extends Component {
 
     return (
       <span className={this.props.wrapperClassName}>
-        {cloneElement(Children.only(this.props.children), {
-          ref: 'target',
+        {cloneElement(child, {
+          ref: (node) => {
+            this._target = node
+            if (typeof child.ref === 'function') {
+              child.ref(node)
+            }
+          },
           ...actionProps,
         })}
         {this._popper()}
@@ -58,7 +63,7 @@ class Tooltip extends Component {
     const props = _.omit(this.props, 'wrapperClassName', 'children')
 
     return (
-      <PortalPopper getTargetNode={() => this.refs.target} {...props} />
+      <PortalPopper getTargetNode={() => this._target} {...props} />
     )
   }
 }
