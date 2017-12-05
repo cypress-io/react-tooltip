@@ -27,7 +27,6 @@ class PortalPopper extends Component {
   static defaultProps = {
     Popper,
     className: '',
-    boundary: document.body,
   }
 
   constructor (...props) {
