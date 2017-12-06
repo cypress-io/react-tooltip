@@ -4,7 +4,7 @@
   "description": "A tooltip component for React apps",
   "main": "dist/tooltip.js",
   "scripts": {
-    "build-dev": "node ./scripts/build-dev.js",
+    "build": "node ./scripts/build-dev.js",
     "build-prod": "node ./scripts/build-prod.js",
     "lint": "eslint --fix src/*.js  src/*.jsx",
     "precommit": "npm run lint",
@@ -52,7 +52,7 @@
     "simple-commit-message": "3.3.1",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "zunder": "^4.1.1"
+    "zunder": "5.5.1"
   },
   "peerDependencies": {
     "lodash": "^4.0.0",
