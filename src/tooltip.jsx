@@ -30,17 +30,6 @@ class Tooltip extends Component {
   render () {
     const child = Children.only(this.props.children)
 
-    const actionProps = this.props.visible == null ? {
-      onMouseOver: (...args) => {
-        child.props.onMouseOver && child.props.onMouseOver(...args)
-        this.setState({ shouldShow: true })
-      },
-      onMouseOut: (...args) => {
-        child.props.onMouseOut && child.props.onMouseOut(...args)
-        this.setState({ shouldShow: false })
-      },
-    } : {}
-
     return (
       <span className={this.props.wrapperClassName}>
         {cloneElement(child, {
@@ -50,7 +39,14 @@ class Tooltip extends Component {
               child.ref(node)
             }
           },
-          ...actionProps,
+          onMouseOver: (...args) => {
+            child.props.onMouseOver && child.props.onMouseOver(...args)
+            this.setState({ shouldShow: true })
+          },
+          onMouseOut: (...args) => {
+            child.props.onMouseOut && child.props.onMouseOut(...args)
+            this.setState({ shouldShow: false })
+          },
         })}
         {this._popper()}
       </span>
