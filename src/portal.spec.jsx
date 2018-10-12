@@ -4,10 +4,6 @@ import React from 'react'
 import Portal from './portal'
 
 describe('<Portal />', () => {
-  it('renders nothing', () => {
-    expect(mount(<Portal />)).to.be.empty
-  })
-
   it('creates a div with a unique id', () => {
     Portal.idNum = 0
     mount(<Portal />)
@@ -18,26 +14,10 @@ describe('<Portal />', () => {
     document.getElementById('portal-1').remove()
   })
 
-  it('renders a div within the portal div with the properties passed in', () => {
+  it('renders children', () => {
     Portal.idNum = 0
-    mount(<Portal className='foo' />)
+    mount(<Portal><div className='foo' /></Portal>)
     expect(document.querySelector('.foo')).to.exist
-    document.getElementById('portal-0').remove()
-  })
-
-  it('renders children within the rendered div', () => {
-    Portal.idNum = 0
-    mount(<Portal className='foo'><div className='bar' /></Portal>)
-    expect(document.querySelector('.bar')).to.exist
-    document.getElementById('portal-0').remove()
-  })
-
-  it('responds to updates', () => {
-    Portal.idNum = 0
-    const component = mount(<Portal className='foo' />)
-    component.setProps({ className: 'foo-new' })
-    expect(document.querySelector('.foo')).not.to.exist
-    expect(document.querySelector('.foo-new')).to.exist
     document.getElementById('portal-0').remove()
   })
 

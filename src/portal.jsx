@@ -1,6 +1,5 @@
-import _ from 'lodash'
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import { Component } from 'react'
+import { createPortal } from 'react-dom'
 
 class Portal extends Component {
   static idNum = 0
@@ -9,7 +8,7 @@ class Portal extends Component {
     appendTo: document.body,
   }
 
-  componentDidMount () {
+  componentWillMount () {
     const appendTo = this.props.appendTo
     const id = `portal-${Portal.idNum++}`
     let element = appendTo.ownerDocument.getElementById(id)
@@ -19,7 +18,6 @@ class Portal extends Component {
       appendTo.appendChild(element)
     }
     this._element = element
-    this.componentDidUpdate()
   }
 
   componentWillUnmount () {
@@ -27,16 +25,11 @@ class Portal extends Component {
     appendTo.removeChild(this._element)
   }
 
-  componentDidUpdate () {
-    render((
-      <div ref={(node) => this.domNode = node} {..._.omit(this.props, 'children', 'appendTo')}>
-        {this.props.children}
-      </div>
-    ), this._element)
-  }
-
   render () {
-    return null
+    return createPortal(
+      this.props.children,
+      this._element,
+    )
   }
 }
 

@@ -2,7 +2,12 @@ module.exports = function setZunderConfig (zunder) {
   zunder.setConfig({
     cacheBust: false,
     prodDir: 'dist',
-    stylesheetName: 'tooltip.css',
+    stylesheets: {
+      'src/main.scss': {
+        watch: ['src/**/*.scss'],
+        output: 'tooltip.css',
+      },
+    },
     testDir: 'dist',
   })
 }

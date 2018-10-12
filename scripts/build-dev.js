@@ -1,14 +1,14 @@
-var z = require('zunder')
-var u = z.undertaker
-var setZunderConfig = require('./set-zunder-config')
+const z = require('zunder')
+const u = z.undertaker
+const setZunderConfig = require('./set-zunder-config')
+const copyScss = require('./copy-scss')
 
 setZunderConfig(z)
 
 u.series(
   z.applyDevEnv,
   z.cleanDev,
-  u.parallel(
-    z.copyDevScripts,
-    z.buildDevStylesheets
-  )
+  z.copyDevScripts,
+  z.buildDevStylesheets,
+  copyScss(z.config.devDir)
 )()

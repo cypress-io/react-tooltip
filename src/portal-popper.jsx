@@ -29,14 +29,10 @@ class PortalPopper extends Component {
     className: '',
   }
 
-  constructor (...props) {
-    super(...props)
-
-    this.state = {
-      arrowProps: initialArrowProps,
-      popperProps: initialPopperProps,
-      flipped: false,
-    }
+  state = {
+    arrowProps: initialArrowProps,
+    popperProps: initialPopperProps,
+    flipped: false,
   }
 
   render () {
@@ -45,32 +41,33 @@ class PortalPopper extends Component {
     const flippedClass = this.state.flipped ? ` ${prefix}-flipped` : ''
 
     return (
-      <Portal
-        ref='portal'
-        className={`${className} ${prefix}-${placement}${flippedClass}`}
-        style={this._getPopperStyle()}
-        appendTo={this.props.appendTo}
-      >
-        <span>{title}</span>
+      <Portal appendTo={this.props.appendTo}>
         <div
-          ref='arrow'
-          className={`${prefix}-arrow`}
-          style={this._getArrowStyle()}
+          ref={(node) => this.portalNode = node}
+          className={`${className} ${prefix}-${placement}${flippedClass}`}
+          style={this._getPopperStyle()}
         >
-          <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>
-            <polygon points='5,0 10,5 5,10 0,5' />
-          </svg>
+          <span>{title}</span>
+          <div
+            ref={(node) => this.arrowNode = node}
+            className={`${prefix}-arrow`}
+            style={this._getArrowStyle()}
+          >
+            <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>
+              <polygon points='5,0 10,5 5,10 0,5' />
+            </svg>
+          </div>
         </div>
       </Portal>
     )
   }
 
   componentDidMount () {
-    this.popper = new this.props.Popper(this.props.getTargetNode(), this.refs.portal.domNode, {
+    this.popper = new this.props.Popper(this.props.getTargetNode(), this.portalNode, {
       content: this.props.title,
       placement: this.props.placement,
       modifiers: {
-        arrow: { element: this.refs.arrow },
+        arrow: { element: this.arrowNode },
         preventOverflow: {
           boundariesElement: this.props.boundary,
         },

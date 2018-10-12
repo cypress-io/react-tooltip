@@ -3,15 +3,19 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import sinon from 'sinon'
 
-import Portal from './portal'
-
 import PortalPopper from './portal-popper'
 
 const getProps = (props) => {
   return _.extend({
+    className: 'tooltip',
     placement: 'top',
     title: 'tooltip title',
     getTargetNode: sinon.stub().returns('target node'),
+    Popper () {
+      return {
+        scheduleUpdate () {},
+      }
+    },
   }, props)
 }
 
@@ -26,15 +30,16 @@ const popperStub = (popperInstance) => sinon.stub().returns(popperInstance)
 
 describe('<PortalPopper />', () => {
   it('renders a <Portal /> with a placement class', () => {
-    const component = shallow(<PortalPopper {...getProps({ className: 'tooltip' })} />)
-    expect(component.find(Portal)).to.have.className('tooltip-top')
+    const component = shallow(<PortalPopper {...getProps()} />)
+    expect(component.find('.tooltip-top')).to.exist
   })
 
   it('renders a <Portal /> with default styles', () => {
     const component = shallow(<PortalPopper {...getProps()} />)
-    expect(component.find(Portal).prop('style').position).to.equal('absolute')
-    expect(component.find(Portal).prop('style').transform).to.equal('translate3d(0px, 0px, 0)')
-    expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(0px, 0px, 0)')
+    const style = component.find('.tooltip-top').prop('style')
+    expect(style.position).to.equal('absolute')
+    expect(style.transform).to.equal('translate3d(0px, 0px, 0)')
+    expect(style.WebkitTransform).to.equal('translate3d(0px, 0px, 0)')
   })
 
   it('renders the title specified', () => {
@@ -44,21 +49,22 @@ describe('<PortalPopper />', () => {
 
   it('renders the tooltip arrow with default styles', () => {
     const component = shallow(<PortalPopper {...getProps({})} />)
-    expect(component.find('div').prop('style').left).to.equal(0)
-    expect(component.find('div').prop('style').top).to.equal(0)
+    const style = component.find('.tooltip-arrow').prop('style')
+    expect(style.left).to.equal(0)
+    expect(style.top).to.equal(0)
   })
 
   it('renders with className specified', () => {
-    const component = shallow(<PortalPopper {...getProps({ className: 'the-tooltip' })} />)
-    expect(component.find(Portal)).to.have.className('the-tooltip')
-    expect(component.find(Portal)).to.have.className('the-tooltip-top')
-    expect(component.find('div')).to.have.className('the-tooltip-arrow')
+    const component = shallow(<PortalPopper {...getProps({ className: 'custom-class' })} />)
+    expect(component.find('.custom-class')).to.exist
+    expect(component.find('.custom-class-top')).to.exist
+    expect(component.find('.custom-class-arrow')).to.exist
   })
 
   it('uses last className as prefix if multiple', () => {
-    const component = shallow(<PortalPopper {...getProps({ className: 'custom-class the-tooltip' })} />)
-    expect(component.find(Portal).prop('className')).to.equal('custom-class the-tooltip the-tooltip-top')
-    expect(component.find('div').prop('className')).to.equal('the-tooltip-arrow')
+    const component = shallow(<PortalPopper {...getProps({ className: 'custom-class tooltip' })} />)
+    expect(component.find('.custom-class').prop('className')).to.equal('custom-class tooltip tooltip-top')
+    expect(component.find('.tooltip-arrow')).to.exist
   })
 
   it('creates Popper instance with the right props', () => {
@@ -94,8 +100,10 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: { arrow: { left: 5, top: 10 } } })
-      expect(component.ref('arrow').prop('style').left).to.equal(5)
-      expect(component.ref('arrow').prop('style').top).to.equal(10)
+      component.update()
+      const style = component.find('.tooltip-arrow').prop('style')
+      expect(style.left).to.equal(5)
+      expect(style.top).to.equal(10)
     })
 
     it('does not update the arrow props if not specified', () => {
@@ -103,8 +111,10 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: {} })
-      expect(component.ref('arrow').prop('style').left).to.equal(0)
-      expect(component.ref('arrow').prop('style').top).to.equal(0)
+      component.update()
+      const style = component.find('.tooltip-arrow').prop('style')
+      expect(style.left).to.equal(0)
+      expect(style.top).to.equal(0)
     })
 
     it('only updates the arrow props that are specified', () => {
@@ -112,8 +122,10 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: { arrow: { top: 20 } } })
-      expect(component.ref('arrow').prop('style').left).to.equal(null)
-      expect(component.ref('arrow').prop('style').top).to.equal(20)
+      component.update()
+      const style = component.find('.tooltip-arrow').prop('style')
+      expect(style.left).to.equal(null)
+      expect(style.top).to.equal(20)
     })
 
     it('rounds the arrow props', () => {
@@ -121,8 +133,10 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: { arrow: { left: 7.2, top: 20.8 } } })
-      expect(component.ref('arrow').prop('style').left).to.equal(7)
-      expect(component.ref('arrow').prop('style').top).to.equal(21)
+      component.update()
+      const style = component.find('.tooltip-arrow').prop('style')
+      expect(style.left).to.equal(7)
+      expect(style.top).to.equal(21)
     })
 
     it('updates the popper props if specified', () => {
@@ -130,9 +144,11 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: { popper: { position: 'relative', left: 2, top: 4 } } })
-      expect(component.find(Portal).prop('style').position).to.equal('relative')
-      expect(component.find(Portal).prop('style').transform).to.equal('translate3d(2px, 4px, 0)')
-      expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(2px, 4px, 0)')
+      component.update()
+      const style = component.find('.tooltip-top').prop('style')
+      expect(style.position).to.equal('relative')
+      expect(style.transform).to.equal('translate3d(2px, 4px, 0)')
+      expect(style.WebkitTransform).to.equal('translate3d(2px, 4px, 0)')
     })
 
     it('does not update the popper props if not specified', () => {
@@ -140,9 +156,11 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: {} })
-      expect(component.find(Portal).prop('style').position).to.equal('absolute')
-      expect(component.find(Portal).prop('style').transform).to.equal('translate3d(0px, 0px, 0)')
-      expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(0px, 0px, 0)')
+      component.update()
+      const style = component.find('.tooltip-top').prop('style')
+      expect(style.position).to.equal('absolute')
+      expect(style.transform).to.equal('translate3d(0px, 0px, 0)')
+      expect(style.WebkitTransform).to.equal('translate3d(0px, 0px, 0)')
     })
 
     it('rounds the popper props', () => {
@@ -150,8 +168,10 @@ describe('<PortalPopper />', () => {
       const Popper = popperStub(popperInstance)
       const component = mount(<PortalPopper {...getProps({ Popper })} />)
       Popper.firstCall.args[2].onUpdate({ offsets: { popper: { left: 15.2, top: 2.8 } } })
-      expect(component.find(Portal).prop('style').transform).to.equal('translate3d(15px, 3px, 0)')
-      expect(component.find(Portal).prop('style').WebkitTransform).to.equal('translate3d(15px, 3px, 0)')
+      component.update()
+      const style = component.find('.tooltip-top').prop('style')
+      expect(style.transform).to.equal('translate3d(15px, 3px, 0)')
+      expect(style.WebkitTransform).to.equal('translate3d(15px, 3px, 0)')
     })
   })
 })

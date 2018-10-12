@@ -19,12 +19,8 @@ class Tooltip extends Component {
     wrapperClassName: '',
   }
 
-  constructor (...props) {
-    super(...props)
-
-    this.state = {
-      shouldShow: false,
-    }
+  state = {
+    shouldShow: false,
   }
 
   render () {
