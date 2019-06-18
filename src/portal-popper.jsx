@@ -35,6 +35,11 @@ class PortalPopper extends Component {
     flipped: false,
   }
 
+  constructor (props) {
+    super(props)
+    this._onMouseOut = this._onMouseOut.bind(this)
+  }
+
   render () {
     const { className, placement, title } = this.props
     const prefix = _.last(className.split(' '))
@@ -46,6 +51,7 @@ class PortalPopper extends Component {
           ref={(node) => this.portalNode = node}
           className={`${className} ${prefix}-${placement}${flippedClass}`}
           style={this._getPopperStyle()}
+          onMouseOut={this._onMouseOut}
         >
           <span>{title}</span>
           <div
@@ -85,13 +91,21 @@ class PortalPopper extends Component {
     }
   }
 
+  _onMouseOut (...args) {
+    this.props.onMouseOut && this.props.onMouseOut(...args)
+  }
+
   _updateData = (data) => {
     if (this.isUnmounted) return
 
     const newState = {}
+
     if (data.offsets.arrow) newState.arrowProps = data.offsets.arrow
+
     if (data.offsets.popper) newState.popperProps = data.offsets.popper
+
     if (data.flipped != null) newState.flipped = data.flipped
+
     this.setState(newState)
   }
 

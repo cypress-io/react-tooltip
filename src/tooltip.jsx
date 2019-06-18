@@ -23,30 +23,49 @@ class Tooltip extends Component {
     shouldShow: false,
   }
 
-  render () {
-    const child = Children.only(this.props.children)
+  child = Children.only(this.props.children)
 
+  constructor (props) {
+    super(props)
+    this._onMouseOver = this._onMouseOver.bind(this)
+    this._onMouseOut = this._onMouseOut.bind(this)
+  }
+
+  render () {
     return (
       <span className={this.props.wrapperClassName}>
-        {cloneElement(child, {
+        {cloneElement(this.child, {
           ref: (node) => {
             this._target = node
-            if (typeof child.ref === 'function') {
-              child.ref(node)
+            if (typeof this.child.ref === 'function') {
+              this.child.ref(node)
             }
           },
-          onMouseOver: (...args) => {
-            child.props.onMouseOver && child.props.onMouseOver(...args)
-            this.setState({ shouldShow: true })
-          },
-          onMouseOut: (...args) => {
-            child.props.onMouseOut && child.props.onMouseOut(...args)
-            this.setState({ shouldShow: false })
-          },
+          onMouseOver: this._onMouseOver,
+          onMouseOut: this._onMouseOut,
         })}
         {this._popper()}
       </span>
     )
+  }
+
+  _onMouseOver (e, ...args) {
+    this.child.props.onMouseOver && this.child.props.onMouseOver(e, ...args)
+    this.setState({ shouldShow: true })
+  }
+
+  _onMouseOut (e, ...args) {
+    if (this.props.clickable) {
+      // if the mouse has moved to the portal, mouse isn't really "out"
+      if ((this._target && this._target.contains(e.relatedTarget)) ||
+          (this.portalPopperNode.portalNode && this.portalPopperNode.portalNode.contains(e.relatedTarget))) {
+        return
+      }
+    }
+
+    this.child.props.onMouseOut && this.child.props.onMouseOut(e, ...args)
+
+    this.setState({ shouldShow: false })
   }
 
   _popper () {
@@ -55,7 +74,10 @@ class Tooltip extends Component {
     const props = _.omit(this.props, 'wrapperClassName', 'children')
 
     return (
-      <PortalPopper getTargetNode={() => this._target} {...props} />
+      <PortalPopper ref={(x) => this.portalPopperNode = x}
+        onMouseOut={this._onMouseOut}
+        getTargetNode={() => this._target}
+        {...props} />
     )
   }
 }
