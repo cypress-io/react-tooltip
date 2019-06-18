@@ -23,15 +23,9 @@ class Tooltip extends Component {
     shouldShow: false,
   }
 
-  child = Children.only(this.props.children)
-
-  constructor (props) {
-    super(props)
-    this._onMouseOver = this._onMouseOver.bind(this)
-    this._onMouseOut = this._onMouseOut.bind(this)
-  }
-
   render () {
+    this.child = Children.only(this.props.children)
+
     return (
       <span className={this.props.wrapperClassName}>
         {cloneElement(this.child, {
@@ -49,18 +43,16 @@ class Tooltip extends Component {
     )
   }
 
-  _onMouseOver (e, ...args) {
+  _onMouseOver = (e, ...args) => {
     this.child.props.onMouseOver && this.child.props.onMouseOver(e, ...args)
     this.setState({ shouldShow: true })
   }
 
-  _onMouseOut (e, ...args) {
-    if (this.props.clickable) {
-      // if the mouse has moved to the portal, mouse isn't really "out"
-      if ((this._target && this._target.contains(e.relatedTarget)) ||
-          (this.portalPopperNode.portalNode && this.portalPopperNode.portalNode.contains(e.relatedTarget))) {
-        return
-      }
+  _onMouseOut = (e, ...args) => {
+    // if the mouse has moved to the portal, mouse isn't really "out"
+    if ((this._target && this._target.contains(e.relatedTarget)) ||
+        (this.portalPopperNode && this.portalPopperNode.portalNode && this.portalPopperNode.portalNode.contains(e.relatedTarget))) {
+      return
     }
 
     this.child.props.onMouseOut && this.child.props.onMouseOut(e, ...args)

@@ -35,11 +35,6 @@ class PortalPopper extends Component {
     flipped: false,
   }
 
-  constructor (props) {
-    super(props)
-    this._onMouseOut = this._onMouseOut.bind(this)
-  }
-
   render () {
     const { className, placement, title } = this.props
     const prefix = _.last(className.split(' '))
@@ -91,7 +86,7 @@ class PortalPopper extends Component {
     }
   }
 
-  _onMouseOut (...args) {
+  _onMouseOut = (...args) => {
     this.props.onMouseOut && this.props.onMouseOut(...args)
   }
 

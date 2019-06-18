@@ -30,7 +30,6 @@ visible | undefined | Whether to show the tooltip when rendered. This overrides 
 className | 'tooltip' | Class applied to the tooltip
 wrapperClassName | '' | Class applied to the `<span>` that wraps the children of `<Tooltip>`
 updateCue | undefined | A prop that indicates that the tooltip's position should update. If the size of the tooltip target changes while the tooltip is showing, the tooltip won't know to update its position. Set this to something that's tied to the target's size or just to a new value to trigger an update of the tooltip's position.
-clickable | undefined | Can the user mouse over the popper to click it?
 
 ## Development
 

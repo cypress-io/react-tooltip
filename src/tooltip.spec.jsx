@@ -97,21 +97,6 @@ describe('<Tooltip />', () => {
       component.find('.target').simulate('mouseOut')
       expect(component.find(PortalPopper)).not.to.exist
     })
-  })
-
-  describe('when clickable is true', () => {
-    let component
-
-    beforeEach(() => {
-      component = shallow(createComponent({
-        clickable: true,
-      }))
-    })
-
-    it('renders popper on mouse over', () => {
-      component.find('.target').simulate('mouseOver')
-      expect(component.find(PortalPopper)).to.exist
-    })
 
     it('keeps popper up on mouse over or click of portal', () => {
       component.find('.target').simulate('mouseOver')
