@@ -1,4 +1,4 @@
-# React Tooltip [![CircleCI](https://circleci.com/gh/cypress-io/react-tooltip.svg?style=svg)](https://circleci.com/gh/cypress-io/react-tooltip)
+# React Tooltip [![renovate-app badge][renovate-badge]][renovate-app] [![CircleCI](https://circleci.com/gh/cypress-io/react-tooltip.svg?style=svg)](https://circleci.com/gh/cypress-io/react-tooltip)
 
 A tooltip component for React apps utilizing the excellent [popper.js library](https://popper.js.org).
 
@@ -63,3 +63,6 @@ For latest changelog see [cypress-io/react-tooltip/releases](https://github.com/
 
 #### 0.1.0 - *(09/28/16)*
 - Initial release
+
+[renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
+[renovate-app]: https://renovateapp.com/
