@@ -1,9 +1,18 @@
-machine:
-  node:
-    # need Node 8 for latest semantic release
-    version: 8
-test:
-  override:
-    - npm test
-  post:
-    - npm run semantic-release || true
+version: 2.1
+jobs:
+  tests:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      - run: npm whoami
+      - run: npm test
+      - run: npm run semantic-release || true
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - tests
