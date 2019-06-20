@@ -12,16 +12,19 @@ class Portal extends Component {
     const appendTo = this.props.appendTo
     const id = `portal-${Portal.idNum++}`
     let element = appendTo.ownerDocument.getElementById(id)
+
     if (!element) {
       element = appendTo.ownerDocument.createElement('div')
       element.id = id
       appendTo.appendChild(element)
     }
+
     this._element = element
   }
 
   componentWillUnmount () {
     const appendTo = this.props.appendTo
+
     appendTo.removeChild(this._element)
   }
 

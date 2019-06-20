@@ -24,6 +24,7 @@ describe('<Portal />', () => {
   it('removes the portal div on unmount', () => {
     Portal.idNum = 0
     const component = mount(<Portal />)
+
     component.unmount()
     expect(document.getElementById('portal-0')).not.to.exist
   })
