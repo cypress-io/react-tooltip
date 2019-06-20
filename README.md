@@ -1,4 +1,4 @@
-# React Tooltip
+# React Tooltip [![CircleCI](https://circleci.com/gh/cypress-io/react-tooltip.svg?style=svg)](https://circleci.com/gh/cypress-io/react-tooltip)
 
 A tooltip component for React apps utilizing the excellent [popper.js library](https://popper.js.org).
 
