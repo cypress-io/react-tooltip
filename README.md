@@ -44,6 +44,8 @@ npm test
 
 ## Changelog
 
+For latest changelog see [cypress-io/react-tooltip/releases](https://github.com/cypress-io/react-tooltip/releases). Older changes are below:
+
 #### 0.2.2 - *(03/10/17)*
 - Add customizable tooltip border
 
