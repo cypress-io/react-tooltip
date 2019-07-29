@@ -84,6 +84,7 @@ describe('<PortalPopper />', () => {
     expect(Popper.firstCall.args[2].modifiers.preventOverflow).to.eql({
       boundariesElement: 'boundary',
     })
+
     expect(Popper.firstCall.args[2].onCreate).to.be.a('function')
     expect(Popper.firstCall.args[2].onUpdate).to.be.a('function')
   })

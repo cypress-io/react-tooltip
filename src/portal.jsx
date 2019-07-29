@@ -25,7 +25,11 @@ class Portal extends Component {
   componentWillUnmount () {
     const appendTo = this.props.appendTo
 
-    appendTo.removeChild(this._element)
+    // it's possible the element was removed from the dom or the dom has been
+    // blown away, which will cause `removeChild` to throw an exception
+    try {
+      appendTo.removeChild(this._element)
+    } catch (err) {} // eslint-disable-line no-empty
   }
 
   render () {
