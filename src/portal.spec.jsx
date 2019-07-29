@@ -28,4 +28,14 @@ describe('<Portal />', () => {
     component.unmount()
     expect(document.getElementById('portal-0')).not.to.exist
   })
+
+  it('gracefully handles the portal div no longer existing on unmount', () => {
+    Portal.idNum = 0
+    const component = mount(<Portal />)
+
+    document.getElementById('portal-0').remove()
+
+    component.unmount() // should not error
+    expect(document.getElementById('portal-0')).not.to.exist
+  })
 })
