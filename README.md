@@ -36,10 +36,13 @@ updateCue | undefined | A prop that indicates that the tooltip's position should
 ```sh
 # watches JS and SCSS for changes and compiles
 # runs tests for associated
-npm start
+npm run watch
 
 # run all tests
 npm test
+
+# creates a demo page at http:localhost:8888/design.html for design purposes
+npm run design
 ```
 
 ## Changelog

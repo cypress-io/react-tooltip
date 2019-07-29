@@ -14,7 +14,9 @@ u.series(
   ensureDevDir,
   copyScss(z.config.devDir),
   u.parallel(
-    z.watchTests,
+    z.watchServer,
+    z.watchStaticAssets,
+    z.watchScripts,
     z.watchStylesheets
   )
 )()
