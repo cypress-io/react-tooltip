@@ -144,6 +144,19 @@ describe('<PortalPopper />', () => {
       expect(style.top).to.equal(20)
     })
 
+    it('only updates the arrow props that are numbers and not NaN', () => {
+      const popperInstance = popperInstanceStub()
+      const Popper = popperStub(popperInstance)
+      const component = mount(<PortalPopper {...getProps({ Popper })} />)
+
+      Popper.firstCall.args[2].onUpdate({ offsets: { arrow: { top: NaN, left: 30 } } })
+      component.update()
+      const style = component.find('.tooltip-arrow').prop('style')
+
+      expect(style.left).to.equal(30)
+      expect(style.top).to.equal(null)
+    })
+
     it('rounds the arrow props', () => {
       const popperInstance = popperInstanceStub()
       const Popper = popperStub(popperInstance)

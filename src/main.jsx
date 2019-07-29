@@ -4,6 +4,11 @@ import Tooltip from './tooltip'
 
 const Design = () => (
   <div>
+    <h1>Demo</h1>
+    <Tooltip title="Hello World">
+      <button>Click me</button>
+    </Tooltip>
+    <h1>Placement</h1>
     <p>
       <Tooltip title='The tooltip text' visible={true} placement='top'>
         <span>top</span>
