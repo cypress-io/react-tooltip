@@ -124,7 +124,9 @@ class PortalPopper extends Component {
   }
 
   _getArrowProp (position) {
-    return _.isNumber(this.state.arrowProps[position]) ? Math.round(this.state.arrowProps[position]) : null
+    const prop = this.state.arrowProps[position]
+
+    return _.isNumber(prop) && !_.isNaN(prop) ? Math.round(prop) : null
   }
 
   componentWillUnmount () {
