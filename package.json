@@ -37,7 +37,7 @@
     "dont-crack": "1.2.1",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
-    "eslint": "6.2.0",
+    "eslint": "6.2.2",
     "eslint-plugin-cypress-dev": "3.0.2",
     "eslint-plugin-mocha": "6.0.0",
     "eslint-plugin-react": "7.14.3",
