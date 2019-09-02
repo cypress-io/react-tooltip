@@ -8,8 +8,10 @@ class Portal extends Component {
     appendTo: document.body,
   }
 
-  componentWillMount () {
-    const appendTo = this.props.appendTo
+  constructor (props) {
+    super(props)
+
+    const appendTo = props.appendTo
     const id = `portal-${Portal.idNum++}`
     let element = appendTo.ownerDocument.getElementById(id)
 
