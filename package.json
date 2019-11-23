@@ -39,7 +39,7 @@
     "enzyme-adapter-react-16": "1.15.1",
     "eslint": "6.6.0",
     "eslint-plugin-cypress-dev": "3.0.2",
-    "eslint-plugin-mocha": "6.2.1",
+    "eslint-plugin-mocha": "6.2.2",
     "eslint-plugin-react": "7.16.0",
     "fs-extra": "8.1.0",
     "jsdom": "15.2.1",
