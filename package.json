@@ -42,7 +42,7 @@
     "eslint-plugin-mocha": "6.3.0",
     "eslint-plugin-react": "7.20.0",
     "fs-extra": "9.0.0",
-    "jsdom": "15.2.1",
+    "jsdom": "16.2.2",
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
     "react": "16.13.1",
