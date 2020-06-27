@@ -50,7 +50,7 @@
     "semantic-release": "17.1.1",
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0",
-    "zunder": "6.4.3"
+    "zunder": "6.4.4"
   },
   "peerDependencies": {
     "lodash": "^4.17.11",
